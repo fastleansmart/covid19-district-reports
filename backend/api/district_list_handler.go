@@ -7,8 +7,8 @@ import (
 	"strconv"
 )
 
-// DistrictsList returns the list of the districts
-func (dep *Handlers) DistrictsList(w http.ResponseWriter, r *http.Request) {
+// DistrictList returns the list of the districts
+func (dep *Handlers) DistrictList(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
 	federalStateID, _ := strconv.Atoi(query.Get("federalStateId"))
 	fmt.Printf("x%dX", federalStateID)

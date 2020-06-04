@@ -14,6 +14,7 @@ type Handlers struct {
 
 // HTTPHandler is a collection of handlers for this project
 type HTTPHandler interface {
-	HandleFederalStateList()
-	HandleDistrictList()
+	FederalStateList()
+	DistrictList()
+	ReportList()
 }
