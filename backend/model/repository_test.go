@@ -29,7 +29,6 @@ func setupDB() *sql.DB {
 }
 
 func TestFederalStateRepositoryFunc(testing *testing.T) {
-
 	db := setupDB()
 	repository := model.MakeRepository(db)
 	fs := model.FederalState{Name: "Schleswig-Holstein"}
@@ -46,7 +45,6 @@ func TestFederalStateRepositoryFunc(testing *testing.T) {
 }
 
 func TestDistrictRepositoryFunc(testing *testing.T) {
-
 	db := setupDB()
 	repository := model.MakeRepository(db)
 	fs := model.District{Name: "Schleswig-Holstein", FederalStateID: 1}
@@ -62,7 +60,6 @@ func TestDistrictRepositoryFunc(testing *testing.T) {
 }
 
 func TestDistrictRepositoryFuncWithArgument(testing *testing.T) {
-
 	db := setupDB()
 	repository := model.MakeRepository(db)
 	fs := model.District{Name: "Plön", FederalStateID: 1}
@@ -83,7 +80,6 @@ func TestDistrictRepositoryFuncWithArgument(testing *testing.T) {
 }
 
 func TestReportRepositoryFunc(testing *testing.T) {
-
 	timeSource := test.MustFixedTimeSource("2020-06-03T15:50:45Z")
 
 	db := setupDB()

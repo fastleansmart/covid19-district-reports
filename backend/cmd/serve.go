@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"os"
 
+	"github.com/fastleansmart/covid19-district-reports/api"
 	"github.com/fastleansmart/covid19-district-reports/server"
 	"github.com/spf13/cobra"
 
@@ -24,7 +25,9 @@ var serveCmd = &cobra.Command{
 		}
 		db.SetMaxOpenConns(1)
 
-		server := server.Server{DB: db}
+		chaosCheeta := api.MakeChaosCheeta(internalServerErrorProbability)
+
+		server := server.Server{DB: db, ChaosCheeta: &chaosCheeta}
 		server.Start()
 	},
 }

@@ -23,14 +23,16 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/spf13/cobra"
 	"os"
+
+	"github.com/spf13/cobra"
 
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/viper"
 )
 
 var cfgFile string
+var internalServerErrorProbability float64
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -72,6 +74,7 @@ func init() {
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	serveCmd.Flags().Float64Var(&internalServerErrorProbability, "errorProbability", 0.0, "Value between 0.0 and 1.0 to describe how often an error occurs")
 	rootCmd.AddCommand(serveCmd)
 	rootCmd.AddCommand(fixturesCmd)
 }
