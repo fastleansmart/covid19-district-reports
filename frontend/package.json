@@ -23,7 +23,8 @@
     "react": "latest",
     "react-dom": "latest",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "latest"
+    "react-scripts": "latest",
+    "use-async-resource": "^2.1.0"
   },
   "browserslist": {
     "production": [
