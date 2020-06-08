@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route } from 'react-router-dom'
 import { ReportsOverview } from '../covidReportsOverview/covidReportsOverview';
+import { ReportForm } from '../reportForm/reportForm';
+import { NotFound } from '../notFound/notFound';
 
 class ContentContainer extends React.Component {
     render() {

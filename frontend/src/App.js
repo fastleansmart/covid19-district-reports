@@ -1,18 +1,17 @@
 import React from 'react';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
+import { BrowserRouter } from 'react-router-dom'
+
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import { ThemeProvider } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
+
 import theme from './theme';
-import { ReportsOverview } from './covidReportsOverview/covidReportsOverview';
+import { ContentContainer } from './components/contentContainer';
 import { Navigation } from './components/navigation';
 import { Header } from './components/header';
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
-import { ContentContainer } from './components/contentContainer';
-import { BrowserRouter } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {

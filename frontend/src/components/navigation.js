@@ -36,8 +36,8 @@ function Navigation() {
     
     const createNavElements = (links) => {
 
-        return links.map(item => 
-            <NavLink className={classes.linktext} to={item.target}>
+        return links.map((item, index) => 
+            <NavLink key={index} className={classes.linktext} to={item.target}>
                 <ListItem button>
                     <ListItemIcon>
                         {item.icon}
