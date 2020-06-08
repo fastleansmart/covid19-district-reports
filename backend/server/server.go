@@ -21,6 +21,8 @@ type Server struct {
 
 // Start the server
 func (server *Server) Start() {
+	corsObj:=handlers.AllowedOrigins([]string{"*"})
+
 	rep := model.MakeRepository(server.DB)
 	err := rep.SetupStructure()
 	if err != nil {
@@ -28,6 +30,7 @@ func (server *Server) Start() {
 	}
 	h := api.MakeHandlers(rep)
 	r := mux.NewRouter()
+	r.Use(handlers.CORS(corsObj))
 	r.HandleFunc("/federal-states", h.FederalStateList)
 	r.HandleFunc("/districts", h.DistrictList)
 	r.HandleFunc("/reports", h.ReportList).Methods("GET")
