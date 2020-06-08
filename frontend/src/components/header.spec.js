@@ -1,9 +1,9 @@
 import { createMount } from '@material-ui/core/test-utils';
-import { ReportsOverview } from './covidReportsOverview';
+import { Header } from './header';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 
-describe('<ReportsOverview />', () => {
+describe('<Header />', () => {
     let mount;
   
     beforeAll(() => {
@@ -15,6 +15,11 @@ describe('<ReportsOverview />', () => {
     });
   
     it('can render overview component', () => {
-        const wrapper = mount(<ReportsOverview />);
+        const wrapper = mount(<Header />);
+    });
+
+    it('shows the introductory message', () => {
+        const wrapper = mount(<Header />);
+        expect(wrapper.find('#introductory-text').exists()).toBeTruthy();
     });
 });
