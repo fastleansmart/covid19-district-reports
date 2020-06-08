@@ -47,7 +47,7 @@ export default function App() {
               </Grid>
               <Grid item xs={9}>
                 <Paper className={classes.paper}>
-                    <ContentContainer />
+                  <ContentContainer />
                 </Paper>
               </Grid>
             </Grid>
