@@ -17,18 +17,20 @@ import (
 type Server struct {
 	DB          *sql.DB
 	ChaosCheeta *api.ChaosCheeta
+	TimeSource  model.TimeSource
 }
 
 // Start the server
 func (server *Server) Start() {
-	corsObj:=handlers.AllowedOrigins([]string{"*"})
+	corsObj := handlers.AllowedOrigins([]string{"*"})
 
 	rep := model.MakeRepository(server.DB)
 	err := rep.SetupStructure()
 	if err != nil {
 		panic(err)
 	}
-	h := api.MakeHandlers(rep)
+
+	h := api.MakeHandlers(rep, server.TimeSource)
 	r := mux.NewRouter()
 	r.Use(handlers.CORS(corsObj))
 	r.HandleFunc("/federal-states", h.FederalStateList)

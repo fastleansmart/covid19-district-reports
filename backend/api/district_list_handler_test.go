@@ -8,9 +8,11 @@ import (
 
 	"github.com/fastleansmart/covid19-district-reports/api"
 	"github.com/fastleansmart/covid19-district-reports/model"
+	"github.com/fastleansmart/covid19-district-reports/test"
 )
 
 func TestDistrictsHandler(t *testing.T) {
+	timeSource := test.MustFixedTimeSource("2020-06-04T07:30:34Z")
 	tr := testRepository{
 		districts: []model.District{
 			{
@@ -20,7 +22,7 @@ func TestDistrictsHandler(t *testing.T) {
 			},
 		},
 	}
-	h := api.MakeHandlers(&tr)
+	h := api.MakeHandlers(&tr, timeSource)
 
 	// Create a request to pass to our handler. We don't have any query parameters for now, so we'll
 	// pass 'nil' as the third parameter.
@@ -52,6 +54,7 @@ func TestDistrictsHandler(t *testing.T) {
 }
 
 func TestDistrictsHandlerWithoutFSID(t *testing.T) {
+	timeSource := test.MustFixedTimeSource("2020-06-04T07:30:34Z")
 	tr := testRepository{
 		districts: []model.District{
 			{
@@ -61,7 +64,7 @@ func TestDistrictsHandlerWithoutFSID(t *testing.T) {
 			},
 		},
 	}
-	h := api.MakeHandlers(&tr)
+	h := api.MakeHandlers(&tr, timeSource)
 
 	// Create a request to pass to our handler. We don't have any query parameters for now, so we'll
 	// pass 'nil' as the third parameter.

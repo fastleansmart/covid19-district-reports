@@ -23,7 +23,7 @@ func TestReportsHandler(t *testing.T) {
 			},
 		},
 	}
-	h := api.MakeHandlers(&tr)
+	h := api.MakeHandlers(&tr, timeSource)
 
 	// Create a request to pass to our handler. We don't have any query parameters for now, so we'll
 	// pass 'nil' as the third parameter.
@@ -47,7 +47,7 @@ func TestReportsHandler(t *testing.T) {
 	}
 
 	// Check the response body is what we expect.
-	expected := `[{"id":1,"date":"2020-06-04T07:30:34Z","count":5,"district_id":1}]`
+	expected := `[{"id":1,"date":"2020-06-04T07:30:34Z","infects":5,"healed":0,"died":0,"district_id":1}]`
 	if strings.Trim(rr.Body.String(), "\n") != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v",
 			rr.Body.String(), expected)
@@ -66,7 +66,7 @@ func TestReportsHandlerWithoutFSID(t *testing.T) {
 			},
 		},
 	}
-	h := api.MakeHandlers(&tr)
+	h := api.MakeHandlers(&tr, timeSource)
 
 	// Create a request to pass to our handler. We don't have any query parameters for now, so we'll
 	// pass 'nil' as the third parameter.
@@ -90,7 +90,7 @@ func TestReportsHandlerWithoutFSID(t *testing.T) {
 	}
 
 	// Check the response body is what we expect.
-	expected := `[{"id":1,"date":"2020-06-04T07:30:34Z","count":5,"district_id":1}]`
+	expected := `[{"id":1,"date":"2020-06-04T07:30:34Z","infects":5,"healed":0,"died":0,"district_id":1}]`
 	if strings.Trim(rr.Body.String(), "\n") != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v",
 			rr.Body.String(), expected)

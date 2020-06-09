@@ -20,13 +20,15 @@ The reports structure for a post is:
 
     {
         district_id: number
-        count: number
+        date: datetime (ISO 8601 2020-06-09T13:22:32Z)
+        infects: number
+        healed: number
+        died: number
     }
 
 To create a new report with curl it looks like this
 
     curl -X POST localhost:7000/reports -d '{ "district_id":1, "count":10 }'
-
 
 ## The Frontend
 

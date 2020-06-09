@@ -49,7 +49,6 @@ type districts struct {
 
 // LoadData receives the test data from an external api
 func LoadData(db *sql.DB) {
-
 	var repository = model.MakeRepository(db)
 	err := repository.SetupStructure()
 	if err != nil {

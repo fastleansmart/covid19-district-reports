@@ -9,15 +9,16 @@ import (
 
 	"github.com/fastleansmart/covid19-district-reports/api"
 	"github.com/fastleansmart/covid19-district-reports/model"
+	"github.com/fastleansmart/covid19-district-reports/test"
 	"github.com/magiconair/properties/assert"
 )
 
 func TestReportCreateHandler(t *testing.T) {
-
+	timeSource := test.MustFixedTimeSource("2020-06-04T07:30:34Z")
 	tr := testRepository{
 		reports: []model.Report{},
 	}
-	h := api.MakeHandlers(&tr)
+	h := api.MakeHandlers(&tr, timeSource)
 
 	// Create a request to pass to our handler. We don't have any query parameters for now, so we'll
 	// pass 'nil' as the third parameter.
@@ -53,11 +54,11 @@ func TestReportCreateHandler(t *testing.T) {
 }
 
 func TestReportCreateHandlerBrokenBody(t *testing.T) {
-
+	timeSource := test.MustFixedTimeSource("2020-06-04T07:30:34Z")
 	tr := testRepository{
 		reports: []model.Report{},
 	}
-	h := api.MakeHandlers(&tr)
+	h := api.MakeHandlers(&tr, timeSource)
 
 	req, err := http.NewRequest("POST", "/", bytes.NewReader([]byte{}))
 	if err != nil {

@@ -19,6 +19,8 @@ type District struct {
 type Report struct {
 	ID         int       `json:"id"`
 	Date       time.Time `json:"date"`
-	Count      int       `json:"count"`
+	Count      int       `json:"infects"`
+	Healed     int       `json:"healed"`
+	Died       int       `json:"died"`
 	DistrictID int       `json:"district_id"`
 }

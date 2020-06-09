@@ -23,9 +23,10 @@ type Repository struct {
 
 // ReportFilter filter the reports table
 type ReportFilter struct {
-	DistrictID int
-	StartDate  time.Time
-	EndDate    time.Time
+	DistrictID     int
+	FederalStateID int
+	StartDate      time.Time
+	EndDate        time.Time
 }
 
 // SetupStructure creates the table structure in the DB
@@ -53,7 +54,9 @@ func (rep *Repository) SetupStructure() error {
 		id INTEGER PRIMARY KEY ASC,
 		timestamp DATETIME NOT NULL,
 		district_id INTEGER NOT NULL,
-		count INTEGER NOT NULL
+		infects INTEGER NOT NULL,
+		healed INTEGER NOT NULL,
+		died INTEGER NOT NULL
 	);`)
 
 	return err
@@ -138,7 +141,7 @@ func (rep *Repository) AddDistrict(d *District) error {
 
 // AddReport inserts a record
 func (rep *Repository) AddReport(r *Report) error {
-	_, err := rep.db.Exec("INSERT INTO reports (timestamp, district_id, count) VALUES ($date, $districtId, $count)", r.Date, r.DistrictID, r.Count)
+	_, err := rep.db.Exec("INSERT INTO reports (timestamp, district_id, infects, healed, died) VALUES ($date, $districtId, $count, $healed, $died)", r.Date, r.DistrictID, r.Count, r.Healed, r.Died)
 
 	return err
 }
@@ -160,7 +163,7 @@ func (rep *Repository) GetReports(filter *ReportFilter) ([]Report, error) {
 
 	for rows.Next() {
 		report := Report{}
-		err := rows.Scan(&report.ID, &report.Date, &report.DistrictID, &report.Count)
+		err := rows.Scan(&report.ID, &report.Date, &report.DistrictID, &report.Count, &report.Healed, &report.Died)
 		if err != nil {
 			return nil, err
 		}

@@ -26,8 +26,8 @@ var serveCmd = &cobra.Command{
 		db.SetMaxOpenConns(1)
 
 		chaosCheeta := api.MakeChaosCheeta(internalServerErrorProbability)
-
-		server := server.Server{DB: db, ChaosCheeta: &chaosCheeta}
+		timeSource := newCurrentTimeSource()
+		server := server.Server{DB: db, ChaosCheeta: &chaosCheeta, TimeSource: timeSource}
 		server.Start()
 	},
 }
