@@ -9,19 +9,23 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 
 import theme from './theme';
-import { ContentContainer } from './components/contentContainer';
-import { Navigation } from './components/navigation';
-import { Header } from './components/header';
+import { ContentContainer } from './components/contentContainer/contentContainer';
+import { Navigation } from './components/navigation/navigation';
+import { Header } from './components/header/header';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    marginTop: '8px',
-  },
-  paper: {
-    padding: theme.spacing(4),
-    color: theme.palette.text.secondary,
-  },
+    root: {
+        flexGrow: 1,
+        marginTop: '8px',
+    },
+    paper: {
+        padding: theme.spacing(0),
+        color: theme.palette.text.secondary,
+    },
+    paperSpaced: {
+        padding: theme.spacing(4),
+        color: theme.palette.text.secondary,
+    },
 }));
 
 export default function App() {
@@ -29,16 +33,15 @@ export default function App() {
 
   return (
       <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <BrowserRouter>
           <Container className={classes.root} maxWidth="md">
             <Grid container spacing={4}>
               <Grid item xs={12}> 
-                <Paper className={classes.paper}>
+                <Paper className={classes.paperSpaced}>
                   <Header />
                 </Paper>
-                </Grid>            
+                </Grid>
               <Grid item xs={3}>
                 <Paper className={classes.paper}>
                   <Navigation />

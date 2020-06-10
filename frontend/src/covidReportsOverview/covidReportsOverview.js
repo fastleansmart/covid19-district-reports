@@ -1,4 +1,6 @@
 import React from 'react';
+import { useAsyncResource } from 'use-async-resource';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,18 +9,20 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { useAsyncResource } from 'use-async-resource';
+
+import { fetchFederalStates } from '../components/data/fetchLoader';
 
 const useStyles = makeStyles({
     table: {},
+    tableRow: {
+        '&:nth-of-type(odd)': {
+            backgroundColor: '#eee',
+        },
+    }
 });
 
-const fetchFederalStates = () => 
-    fetch(`http://localhost:8070/federal-states`)
-        .then(res => res.json())
-
 function ReportsOverview() {
-    const [fetchAllFederalStates] = useAsyncResource(fetchFederalStates, []);  
+    const [fetchAllFederalStates] = useAsyncResource(fetchFederalStates, []);
 
     return (
         <React.Suspense fallback="states are loading">
@@ -29,13 +33,13 @@ function ReportsOverview() {
 
 function OverviewTable({ fetchAllFederalStates }) {
     const classes = useStyles();
-    const states = fetchAllFederalStates();
+    const federalStates = fetchAllFederalStates();
 
     return (
         <TableContainer component={Paper}>
-            <Table className={classes.table} stickyHeader aria-label="simple table">
+            <Table size={'small'} className={classes.table} stickyHeader aria-label="simple table">
                 <TableHead>
-                    <TableRow>
+                    <TableRow className={classes.tableRow}>
                         <TableCell>Bundesland</TableCell>
                         <TableCell align="right">gemeldete Fälle</TableCell>
                         <TableCell align="right">davon genesen</TableCell>
@@ -43,24 +47,27 @@ function OverviewTable({ fetchAllFederalStates }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {states.map(state => 
-                        <TableRow key={state.id}>
-                            <TableCell>
-                                {state.name}
-                            </TableCell>
-                            <TableCell align="right">
-                                {0}
-                            </TableCell>
-                            <TableCell align="right">
-                                {0}
-                            </TableCell>
-                            <TableCell align="right">
-                                {0}
-                            </TableCell>
-                        </TableRow>)}
+                    {federalStates.map((federalState, index) => 
+                        <OverviewTable.Row key={index} federalState={federalState} />
+                    )}
                 </TableBody>
             </Table>
         </TableContainer>
+    );
+}
+
+OverviewTable.Row = function OverviewTableRow({ federalState }) {
+    const classes = useStyles();
+
+    return (
+        <React.Fragment>
+            <TableRow className={classes.tableRow} key={federalState.id}>
+                <TableCell>{federalState.name}</TableCell>
+                <TableCell align="right">{0}</TableCell>
+                <TableCell align="right">{0}</TableCell>
+                <TableCell align="right">{0}</TableCell>
+            </TableRow>
+        </React.Fragment>
     );
 }
 

@@ -1,10 +1,11 @@
 import React from 'react';
+import { Paper } from '@material-ui/core';
 
 function ReportForm() {
     return (
-        <div id="#reportform">
+        <Paper component={'div'} id="#reportform">
 
-        </div>
+        </Paper>
     )
 }
 
