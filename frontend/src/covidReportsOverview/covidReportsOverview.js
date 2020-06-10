@@ -10,26 +10,26 @@ import Paper from '@material-ui/core/Paper';
 import { useAsyncResource } from 'use-async-resource';
 
 const useStyles = makeStyles({
-  table: {},
+    table: {},
 });
 
-const fetchStates = () => 
+const fetchFederalStates = () => 
     fetch(`http://localhost:8070/federal-states`)
         .then(res => res.json())
 
- function ReportsOverview() {
-    const [fetchAllStates] = useAsyncResource(fetchStates, []);  
+function ReportsOverview() {
+    const [fetchAllFederalStates] = useAsyncResource(fetchFederalStates, []);  
 
     return (
         <React.Suspense fallback="states are loading">
-            <OverviewTable fetchAllStates={fetchAllStates} />
+            <OverviewTable fetchAllFederalStates={fetchAllFederalStates} />
         </React.Suspense>
-  );
+    );
 }
 
-function OverviewTable({ fetchAllStates }) {
+function OverviewTable({ fetchAllFederalStates }) {
     const classes = useStyles();
-    const states = fetchAllStates();
+    const states = fetchAllFederalStates();
 
     return (
         <TableContainer component={Paper}>
