@@ -3,9 +3,10 @@ package api_test
 import "github.com/fastleansmart/covid19-district-reports/model"
 
 type testRepository struct {
-	federalStates []model.FederalState
-	districts     []model.District
-	reports       []model.Report
+	federalStates  []model.FederalState
+	districts      []model.District
+	reports        []model.Report
+	summaryReports []model.SummaryReport
 }
 
 func (r *testRepository) GetFederalStates() ([]model.FederalState, error) {
@@ -40,9 +41,9 @@ func (r *testRepository) SetupStructure() error {
 }
 
 func (r *testRepository) GetFederalStatesSummary() ([]model.SummaryReport, error) {
-	return nil, nil
+	return r.summaryReports, nil
 }
 
 func (r *testRepository) GetDistrictSummary(federalStateID int) ([]model.SummaryReport, error) {
-	return nil, nil
+	return r.summaryReports, nil
 }

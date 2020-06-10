@@ -28,41 +28,6 @@ func setupDB() *sql.DB {
 	return db
 }
 
-func setUpTestStates(repository model.DataAccessor) {
-	tFederalStates := []model.FederalState{
-		{
-			Name: "Baden-Würtemberg",
-		},
-		{
-			Name: "Bayern",
-		},
-	}
-	for _, fs := range tFederalStates {
-		_, _ = repository.AddFederalState(&fs)
-	}
-	tDistricts := []model.District{
-		{
-			Name:           "Biberach",
-			FederalStateID: 1,
-		},
-		{
-			Name:           "Ludwigsburg",
-			FederalStateID: 1,
-		},
-		{
-			Name:           "Kelheim",
-			FederalStateID: 2,
-		},
-		{
-			Name:           "Ingolstadt",
-			FederalStateID: 2,
-		},
-	}
-	for _, fs := range tDistricts {
-		_ = repository.AddDistrict(&fs)
-	}
-}
-
 func TestFederalStateRepositoryFunc(testing *testing.T) {
 	db := setupDB()
 	repository := model.MakeRepository(db)
@@ -135,7 +100,7 @@ func TestReportRepositoryFunc(t *testing.T) {
 func TestReportRepositoryFederalStateSummary(t *testing.T) {
 	db := setupDB()
 	repository := model.MakeRepository(db)
-	setUpTestStates(repository)
+	test.SetUpTestStates(repository)
 
 	testData := []model.Report{
 		{
@@ -205,7 +170,7 @@ func TestReportRepositoryFederalStateSummary(t *testing.T) {
 func TestReportRepositoryDistrictSummary(t *testing.T) {
 	db := setupDB()
 	repository := model.MakeRepository(db)
-	setUpTestStates(repository)
+	test.SetUpTestStates(repository)
 
 	testData := []model.Report{
 		{
