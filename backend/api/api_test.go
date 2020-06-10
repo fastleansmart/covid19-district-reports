@@ -38,3 +38,11 @@ func (r *testRepository) GetReports(filter *model.ReportFilter) ([]model.Report,
 func (r *testRepository) SetupStructure() error {
 	return nil
 }
+
+func (r *testRepository) GetFederalStatesSummary() ([]model.SummaryReport, error) {
+	return nil, nil
+}
+
+func (r *testRepository) GetDistrictSummary(federalStateID int) ([]model.SummaryReport, error) {
+	return nil, nil
+}
