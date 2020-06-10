@@ -24,3 +24,12 @@ type Report struct {
 	Died       int       `json:"died"`
 	DistrictID int       `json:"district_id"`
 }
+
+// SummaryReport describes cummulated data for a federal state or district
+type SummaryReport struct {
+	FederalStateID int    `json:"federalState_id"`
+	Name           string `json:"name"`
+	Count          int    `json:"infects"`
+	Healed         int    `json:"healed"`
+	Died           int    `json:"died"`
+}

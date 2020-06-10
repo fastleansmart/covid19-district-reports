@@ -14,6 +14,8 @@ type DataAccessor interface {
 	SetupStructure() error
 	AddReport(d *Report) error
 	GetReports(filter *ReportFilter) ([]Report, error)
+	GetFederalStatesSummary() ([]SummaryReport, error)
+	GetDistrictSummary(federalStateId int) ([]SummaryReport, error)
 }
 
 // Repository alllows the access to a db
@@ -164,6 +166,46 @@ func (rep *Repository) GetReports(filter *ReportFilter) ([]Report, error) {
 	for rows.Next() {
 		report := Report{}
 		err := rows.Scan(&report.ID, &report.Date, &report.DistrictID, &report.Count, &report.Healed, &report.Died)
+		if err != nil {
+			return nil, err
+		}
+		reports = append(reports, report)
+	}
+
+	return reports, nil
+}
+
+// GetFederalStatesSummary group and sum reported cases for each federal state
+func (rep *Repository) GetFederalStatesSummary() (reports []SummaryReport, err error) {
+	var rows *sql.Rows
+	rows, err = rep.db.Query("SELECT f.name, SUM(infects) as infects, SUM(healed) as healed, SUM(died) as died, f.id FROM reports  as r LEFT JOIN districts as d ON (d.id = r.district_id) LEFT JOIN federalStates as f ON ( f.id = d.federalState_id) GROUP BY d.federalState_id;")
+	if err != nil {
+		return nil, err
+	}
+
+	for rows.Next() {
+		report := SummaryReport{}
+		err := rows.Scan(&report.Name, &report.Count, &report.Healed, &report.Died, &report.FederalStateID)
+		if err != nil {
+			return nil, err
+		}
+		reports = append(reports, report)
+	}
+
+	return reports, nil
+}
+
+// GetDistrictSummary calculate the summary for districts in a federal state
+func (rep *Repository) GetDistrictSummary(federalStateID int) (reports []SummaryReport, err error) {
+	var rows *sql.Rows
+	rows, err = rep.db.Query("SELECT d.name,  SUM(infects) as infects, SUM(healed) as healed, SUM(died) as died   FROM reports  as r LEFT JOIN districts as d ON (d.id = r.district_id)  WHERE d.federalState_id = $federalSTateId GROUP BY d.id;", federalStateID)
+	if err != nil {
+		return nil, err
+	}
+
+	for rows.Next() {
+		report := SummaryReport{}
+		err := rows.Scan(&report.Name, &report.Count, &report.Healed, &report.Died)
 		if err != nil {
 			return nil, err
 		}

@@ -14,12 +14,12 @@ import (
 func TestReportsHandler(t *testing.T) {
 	timeSource := test.MustFixedTimeSource("2020-06-04T07:30:34Z")
 	tr := testRepository{
-		reports: []model.Report{
+		summaryReports: []model.SummaryReport{
 			{
-				ID:         1,
-				DistrictID: 1,
-				Date:       timeSource.Now(),
-				Count:      5,
+				Name:   "Biberach",
+				Count:  5,
+				Healed: 0,
+				Died:   0,
 			},
 		},
 	}
@@ -27,7 +27,7 @@ func TestReportsHandler(t *testing.T) {
 
 	// Create a request to pass to our handler. We don't have any query parameters for now, so we'll
 	// pass 'nil' as the third parameter.
-	req, err := http.NewRequest("GET", "/", nil)
+	req, err := http.NewRequest("GET", "/?federalStateId=1", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -47,7 +47,7 @@ func TestReportsHandler(t *testing.T) {
 	}
 
 	// Check the response body is what we expect.
-	expected := `[{"id":1,"date":"2020-06-04T07:30:34Z","infects":5,"healed":0,"died":0,"district_id":1}]`
+	expected := `[{"federalState_id":0,"name":"Biberach","infects":5,"healed":0,"died":0}]`
 	if strings.Trim(rr.Body.String(), "\n") != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v",
 			rr.Body.String(), expected)
@@ -57,12 +57,13 @@ func TestReportsHandler(t *testing.T) {
 func TestReportsHandlerWithoutFSID(t *testing.T) {
 	timeSource := test.MustFixedTimeSource("2020-06-04T07:30:34Z")
 	tr := testRepository{
-		reports: []model.Report{
+		summaryReports: []model.SummaryReport{
 			{
-				ID:         1,
-				DistrictID: 1,
-				Date:       timeSource.Now(),
-				Count:      5,
+				Name:           "Baden-Würtemberg",
+				Count:          7,
+				Healed:         7,
+				Died:           7,
+				FederalStateID: 1,
 			},
 		},
 	}
@@ -90,7 +91,7 @@ func TestReportsHandlerWithoutFSID(t *testing.T) {
 	}
 
 	// Check the response body is what we expect.
-	expected := `[{"id":1,"date":"2020-06-04T07:30:34Z","infects":5,"healed":0,"died":0,"district_id":1}]`
+	expected := `[{"federalState_id":1,"name":"Baden-Würtemberg","infects":7,"healed":7,"died":7}]`
 	if strings.Trim(rr.Body.String(), "\n") != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v",
 			rr.Body.String(), expected)
