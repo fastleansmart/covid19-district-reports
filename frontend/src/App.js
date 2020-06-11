@@ -13,6 +13,8 @@ import { ContentContainer } from './components/contentContainer/contentContainer
 import { Navigation } from './components/navigation/navigation';
 import { Header } from './components/header/header';
 
+import './ascii-art';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
