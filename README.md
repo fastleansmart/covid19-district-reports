@@ -34,7 +34,7 @@ To create a new report with curl it looks like this
 
 The frontend can be launched in a docker container and exposes port 7000.
 
-    docker run --rm -p 8080:7000 covid19-district-reports/frontend
+    docker run --name frontend --rm -p 8080:3000 covid19-district-reports/frontend
 
 This starts the container and publishes the API at port 8080. A request to http://localhost:8080/ will show the frontend web page.
 The frontend itself is based on the create-react-app project and supports its commands:
@@ -43,3 +43,11 @@ The frontend itself is based on the create-react-app project and supports its co
 - `npm build` for running a production build of the app
 - `npm test` for running all tests (for the frontend project)
 - `npm eject` for ejecting out of the create-react-app ecosystem
+
+## Putting it all together
+
+Both services can be started simultaneously using `docker-compose`. We added a `docker-compose.yml`. So executing the following command will start both the backend and the frontend container:
+
+    docker-compose up
+
+Happy hacking!

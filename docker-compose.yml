@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  frontend:
+    image: covid19-district-reports/frontend
+    ports:
+      - "8080:3000"
+    depends_on:
+      - backend
+
+  backend:
+    image: covid19-district-reports/backend
+    ports:
+      - "8070:7000"
