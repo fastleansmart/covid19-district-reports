@@ -4,6 +4,11 @@ Example app for reporting Covid-19 case numbers to a stub API.
 
 ## The API
 
+Create a local docker image from the sources
+
+    $ cd backend
+    $ docker build -t covid19-district-reports/backend .
+
 The API can be launched in a docker container and exposes port 7000.
 
     docker run --rm -p 8070:7000 covid19-district-reports/backend
@@ -13,7 +18,8 @@ The endpoints are:
 
 - [GET] /federal-states
 - [GET] /districts?federalStateId=<id from above endpoint>
-- [GET] /reports
+- [GET] /reports // list of summarized data for federal states
+- [GET] /reports?federalStateId=<id from above endpoint> // list of summarized data for districts
 - [POST] /reports
 
 The reports structure for a post is:
@@ -28,7 +34,7 @@ The reports structure for a post is:
 
 To create a new report with curl it looks like this
 
-    curl -X POST localhost:7000/reports -d '{ "district_id":1, "count":10 }'
+    curl -X POST localhost:7000/reports -d '{ "district_id":1, "infects":10, "healed": 0, "died": 5 }'
 
 ## The Frontend
 
