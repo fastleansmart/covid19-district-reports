@@ -4,12 +4,12 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 
 const routes = [
     {
-        label: "Übersicht",
+        label: "Overview",
         target: "/overview",
         icon: <InboxIcon />,
     },
     {
-        label: "Daten erfassen",
+        label: "Report data",
         target: "/add",
         icon: <DraftsIcon />,
     },

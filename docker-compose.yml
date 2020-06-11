@@ -2,6 +2,8 @@ version: '3.4'
 
 services:
   frontend:
+    build:
+      context: ./frontend
     image: covid19-district-reports/frontend
     ports:
       - "8080:3000"
@@ -9,6 +11,8 @@ services:
       - backend
 
   backend:
+    build:
+      context: ./backend
     image: covid19-district-reports/backend
     ports:
       - "8070:7000"

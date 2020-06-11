@@ -40,10 +40,10 @@ function OverviewTable({ fetchAllFederalStates }) {
             <Table size={'small'} className={classes.table} stickyHeader aria-label="simple table">
                 <TableHead>
                     <TableRow className={classes.tableRow}>
-                        <TableCell>Bundesland</TableCell>
-                        <TableCell align="right">gemeldete Fälle</TableCell>
-                        <TableCell align="right">davon genesen</TableCell>
-                        <TableCell align="right">Todesfälle</TableCell>
+                        <TableCell>Federal state</TableCell>
+                        <TableCell align="right">number of infections</TableCell>
+                        <TableCell align="right">of which were healed</TableCell>
+                        <TableCell align="right">deaths</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
