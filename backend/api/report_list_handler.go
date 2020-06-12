@@ -11,10 +11,10 @@ import (
 // ReportList returns the list of the districts
 func (dep *Handlers) ReportList(w http.ResponseWriter, r *http.Request) {
 	var err error
-	var reports []model.SummaryReport
+	reports := []model.SummaryReport{}
 	query := r.URL.Query()
 	federalStateID, err := strconv.Atoi(query.Get("federalStateId"))
-	if err != nil {
+	if err == nil {
 		reports, err = dep.repository.GetDistrictSummary(federalStateID)
 	} else {
 		reports, err = dep.repository.GetFederalStatesSummary()

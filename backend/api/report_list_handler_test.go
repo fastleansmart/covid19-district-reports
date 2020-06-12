@@ -14,7 +14,7 @@ import (
 func TestReportsHandler(t *testing.T) {
 	timeSource := test.MustFixedTimeSource("2020-06-04T07:30:34Z")
 	tr := testRepository{
-		summaryReports: []model.SummaryReport{
+		summaryReportsDistrict: []model.SummaryReport{
 			{
 				Name:   "Biberach",
 				Count:  5,
