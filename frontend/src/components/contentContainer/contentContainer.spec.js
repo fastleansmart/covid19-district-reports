@@ -1,5 +1,6 @@
 import { createMount } from '@material-ui/core/test-utils';
 import { ContentContainer } from './contentContainer';
+import { BrowserRouter } from "react-router-dom";
 import React from 'react';
 
 describe('<ContentContainer />', () => {
@@ -14,6 +15,6 @@ describe('<ContentContainer />', () => {
     });
   
     it('can render App Component', () => {
-        const wrapper = mount(<ContentContainer />);
+        const wrapper = mount(<BrowserRouter><ContentContainer /></BrowserRouter>);
     });
 });

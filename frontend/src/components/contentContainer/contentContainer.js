@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { ReportsOverviewContainer } from "../../covidReportsOverview/covidReportsOverviewContainer";
+import { ReportsOverviewContainer } from "../../ReportsOverview/ReportsOverviewContainer";
 import { ReportForm } from "../../reportForm/reportForm";
-import { NotFound } from "../../notFound/notFound";
+import { NotFound } from "../../NotFound/NotFound";
 
 class ContentContainer extends React.Component {
   render() {
@@ -13,7 +13,7 @@ class ContentContainer extends React.Component {
         </Route>
         <Route path="/overview" exact component={ReportsOverviewContainer} />
         <Route path="/add" exact component={ReportForm} />
-        <Route component={NotFound} />
+        <Route path="/404"  component={NotFound} />
       </div>
     );
   }

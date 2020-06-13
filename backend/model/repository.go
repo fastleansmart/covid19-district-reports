@@ -176,8 +176,10 @@ func (rep *Repository) GetReports(filter *ReportFilter) ([]Report, error) {
 }
 
 // GetFederalStatesSummary group and sum reported cases for each federal state
-func (rep *Repository) GetFederalStatesSummary() (reports []SummaryReport, err error) {
+func (rep *Repository) GetFederalStatesSummary() ([]SummaryReport, error) {
 	var rows *sql.Rows
+	var err error
+	reports := []SummaryReport{}
 	rows, err = rep.db.Query("SELECT f.name, SUM(infects) as infects, SUM(healed) as healed, SUM(died) as died, f.id FROM reports  as r LEFT JOIN districts as d ON (d.id = r.district_id) LEFT JOIN federalStates as f ON ( f.id = d.federalState_id) GROUP BY d.federalState_id;")
 	if err != nil {
 		return nil, err

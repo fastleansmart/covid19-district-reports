@@ -45,10 +45,10 @@ The frontend can be launched in a docker container and exposes port 7000.
 This starts the container and publishes the API at port 8080. A request to http://localhost:8080/ will show the frontend web page.
 The frontend itself is based on the create-react-app project and supports its commands:
 
-- `npm start` for development
-- `npm build` for running a production build of the app
-- `npm test` for running all tests (for the frontend project)
-- `npm eject` for ejecting out of the create-react-app ecosystem
+- `yarn start` for development
+- `yarn build` for running a production build of the app
+- `yarn test` for running all tests (for the frontend project)
+- `yarn eject` for ejecting out of the create-react-app ecosystem
 
 ## Putting it all together
 
