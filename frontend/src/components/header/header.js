@@ -6,13 +6,13 @@ class Header extends React.Component {
         return (
             <div id="header">
                 <Typography variant="h4" component="h1" gutterBottom>
-                    Covid-19 Falldaten für Kreise
+                    Covid-19 District Reports
                 </Typography>
                 <Typography variant="body1" component="p" id="introductory-text">
-                    Willkommen auf der Covid-19 Falldaten-App für alle deutschen Kreise.
-                    Auf dieser Seite können die bisher gemeldeteten Fallzahlen eingesehen und neue Zahlen eingereicht werden.
-                    Es gibt die Übersichts-Seite, auf der tabellarischen Falldaten einsehbar sind.
-                    Unter dem Menüpunkt "Daten erfassen" können aktuelle Daten eines Kreises erfasst werden.
+                    Welcome to the Covid-19 case data reporting app for all german districts.
+                    On this page, you can see all case data that has been reported so far. You are also able to report new data for any district.
+                    The app consists of the overview page showing data in a tabular manner.
+                    Under the link "Report data" you can report current data.
                 </Typography>
             </div>
         )

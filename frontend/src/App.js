@@ -14,6 +14,8 @@ import { Navigation } from "./components/navigation/navigation";
 import { Header } from "./components/header/header";
 import { RenderNotificationContext } from "./context/RenderNotification";
 
+import './ascii-art';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
