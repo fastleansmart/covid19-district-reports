@@ -17,11 +17,7 @@
     "react": "latest",
     "react-dom": "latest",
     "react-router-dom": "^5.2.0",
-<<<<<<< HEAD
     "react-scripts": "^3.4.1",
-=======
-    "react-scripts": "^3.1.4",
->>>>>>> master
     "use-async-resource": "^2.1.0"
   },
   "browserslist": {
