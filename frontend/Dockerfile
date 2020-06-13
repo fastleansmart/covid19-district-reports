@@ -1,7 +1,7 @@
 FROM node:14 AS builder
 WORKDIR /app
 COPY . .
-RUN npm install react-scripts -g --silent
+#RUN npm install react-scripts -g --silent # maybe not needed
 RUN yarn install
 RUN yarn run build
 
