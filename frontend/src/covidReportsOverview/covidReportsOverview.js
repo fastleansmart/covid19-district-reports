@@ -45,27 +45,6 @@ function OverviewTable({ fetchAllFederalStates }) {
   const classes = useStyles();
   const federalStates = fetchAllFederalStates();
 
-<<<<<<< HEAD
-  return (
-    <TableContainer component={Paper}>
-      <Table size={"small"} className={classes.table} stickyHeader aria-label="simple table">
-        <TableHead>
-          <TableRow className={classes.tableRow}>
-            <TableCell>Bundesland</TableCell>
-            <TableCell align="right">gemeldete Fälle</TableCell>
-            <TableCell align="right">davon genesen</TableCell>
-            <TableCell align="right">Todesfälle</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {federalStates.map((federalState, index) => (
-            <OverviewTable.Row key={index} federalState={federalState} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
-=======
     return (
         <TableContainer component={Paper}>
             <Table size={'small'} className={classes.table} stickyHeader aria-label="simple table">
@@ -85,7 +64,6 @@ function OverviewTable({ fetchAllFederalStates }) {
             </Table>
         </TableContainer>
     );
->>>>>>> master
 }
 
 OverviewTable.Row = function OverviewTableRow({ federalState }) {
