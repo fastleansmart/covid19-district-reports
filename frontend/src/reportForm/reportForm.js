@@ -1,4 +1,6 @@
 import React from 'react';
+import { useAsyncResource } from 'use-async-resource';
+
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
@@ -9,6 +11,8 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
+
+import { fetchFederalStates } from '../components/data/fetchLoader';
 
 const useStyles = makeStyles((theme) => ({
     subheading: {
@@ -35,6 +39,8 @@ function ReportForm() {
     const [numOfHealed, setNumOfHealed] = React.useState(null);
     const [numOfDeaths, setNumOfDeaths] = React.useState(null);
 
+    const [fetchAllFederalStates] = useAsyncResource(fetchFederalStates, []);
+
     const handleChangeFederalState = (event) => {
         if (event.target.value !== undefined && event.target.value !== null)
             setDistrictEnabled(false);
@@ -49,14 +55,12 @@ function ReportForm() {
                         <Typography className={classes.subheading} variant="h6" component="h4">Record new data</Typography>
                     </Grid>
                     <Grid item xs={4}> 
-                        <FormControl className={classes.formControl}>
-                            <InputLabel>Federal state</InputLabel>
-                            <Select onChange={handleChangeFederalState}>
-                                <MenuItem value={1}>NRW</MenuItem>
-                                <MenuItem value={2}>Meckpom</MenuItem>
-                                <MenuItem value={3}>Bawü</MenuItem>
-                            </Select>
-                        </FormControl>
+                        <React.Suspense fallback="states are loading">
+                            <FederalStateSelect 
+                                fetchAllFederalStates={fetchAllFederalStates} 
+                                handleChangeFederalState={handleChangeFederalState}
+                            />
+                        </React.Suspense>
                     </Grid>
                     <Grid item xs={4}> 
                         <FormControl className={classes.formControl}>
@@ -92,6 +96,25 @@ function ReportForm() {
             </form>
         </Paper>
     )
+}
+
+function FederalStateSelect({ fetchAllFederalStates, handleChangeFederalState }) {
+    const classes = useStyles();
+
+    const federalStates = fetchAllFederalStates();
+    console.log(federalStates)
+    return (
+        <FormControl className={classes.formControl}>
+            <InputLabel>Federal state</InputLabel>
+            <Select onChange={handleChangeFederalState}>
+                {federalStates.map(federalState => 
+                    <MenuItem key={federalState.id} value={federalState.id}>
+                        {federalState.name}
+                    </MenuItem>
+                )}
+            </Select>
+        </FormControl>
+    );
 }
 
 export { ReportForm };
