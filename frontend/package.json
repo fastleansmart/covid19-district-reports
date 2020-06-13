@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@material-ui/core": "latest",
+    "@material-ui/lab": "latest",
     "@material-ui/icons": "^4.9.1",
     "clsx": "^1.0.4",
     "enzyme": "^3.11.0",
