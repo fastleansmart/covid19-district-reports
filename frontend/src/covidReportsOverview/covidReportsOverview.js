@@ -10,7 +10,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Alert from "@material-ui/lab/Alert";
-import Grid from '@material-ui/core/Grid';
 
 import { fetchFederalStateSummaryReports } from "../components/data/fetchLoader";
 
@@ -48,11 +47,6 @@ function OverviewTable({ federalStateSummaryReports }) {
 
     return (
         <TableContainer component={Paper}>
-            <Grid xs={12}>
-                <FormControl>
-
-                </FormControl>
-            </Grid>
             <Table size={'small'} className={classes.table} stickyHeader aria-label="simple table">
                 <TableHead>
                     <TableRow className={classes.tableRow}>

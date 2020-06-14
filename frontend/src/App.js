@@ -17,57 +17,57 @@ import { RenderNotificationContext } from "./context/RenderNotification";
 import './ascii-art';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    marginTop: "8px",
-  },
-  paper: {
-    padding: theme.spacing(0),
-    color: theme.palette.text.secondary,
-  },
-  paperSpaced: {
-    padding: theme.spacing(4),
-    color: theme.palette.text.secondary,
-  },
+    root: {
+        flexGrow: 1,
+        marginTop: "8px",
+    },
+    paper: {
+        padding: theme.spacing(0),
+        color: theme.palette.text.secondary,
+    },
+    paperSpaced: {
+        padding: theme.spacing(4),
+        color: theme.palette.text.secondary,
+    },
 }));
 
 export default function App() {
-  const classes = useStyles();
-  const [notificationOpen, setNotificationOpen] = useState(false);
-  const [notificationContent, setNotificationContent] = useState(null);
-  const renderNotification = (content) => {
-    setNotificationContent(content);
-    setNotificationOpen(true);
-  };
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <RenderNotificationContext.Provider value={renderNotification}>
-        <BrowserRouter>
-          <Container className={classes.root} maxWidth="md">
-            <Snackbar open={notificationOpen} autoHideDuration={6000} onClose={() => setNotificationOpen(false)}>
-              {notificationContent ? notificationContent : null}
-            </Snackbar>
-            <Grid container spacing={4}>
-              <Grid item xs={12}>
-                <Paper className={classes.paperSpaced}>
-                  <Header />
-                </Paper>
-              </Grid>
-              <Grid item xs={3}>
-                <Paper className={classes.paper}>
-                  <Navigation />
-                </Paper>
-              </Grid>
-              <Grid item xs={9}>
-                <Paper className={classes.paper}>
-                  <ContentContainer />
-                </Paper>
-              </Grid>
-            </Grid>
-          </Container>
-        </BrowserRouter>
-      </RenderNotificationContext.Provider>
-    </ThemeProvider>
-  );
+    const classes = useStyles();
+    const [notificationOpen, setNotificationOpen] = useState(false);
+    const [notificationContent, setNotificationContent] = useState(null);
+    const renderNotification = (content) => {
+        setNotificationContent(content);
+        setNotificationOpen(true);
+    };
+    return (
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <RenderNotificationContext.Provider value={renderNotification}>
+                <BrowserRouter>
+                    <Container className={classes.root} maxWidth="md">
+                        <Snackbar open={notificationOpen} autoHideDuration={6000} onClose={() => setNotificationOpen(false)}>
+                            {notificationContent ? notificationContent : null}
+                        </Snackbar>
+                        <Grid container spacing={4}>
+                            <Grid item xs={12}>
+                                <Paper className={classes.paperSpaced}>
+                                    <Header />
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <Paper className={classes.paper}>
+                                    <Navigation />
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={9}>
+                                <Paper className={classes.paper}>
+                                    <ContentContainer />
+                                </Paper>
+                            </Grid>
+                        </Grid>
+                    </Container>
+                </BrowserRouter>
+            </RenderNotificationContext.Provider>
+        </ThemeProvider>
+    );
 }
