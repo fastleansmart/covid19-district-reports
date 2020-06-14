@@ -37,7 +37,7 @@ func (server *Server) Start() {
 	r.Use(handlers.CORS(corsObj, methodsOk, headersOk))
 	r.HandleFunc("/federal-states", h.FederalStateList)
 	r.HandleFunc("/districts", h.DistrictList)
-	r.HandleFunc("/reports", h.ReportList).Methods("GET", "OPTIONS")
+	r.HandleFunc("/reports", h.ReportList).Methods("GET")
 	r.HandleFunc("/reports", h.ReportCreate).Methods("POST", "OPTIONS")
 	r.Use(handlers.RecoveryHandler())
 	r.Use(server.ChaosCheeta.Chaos)
@@ -46,7 +46,7 @@ func (server *Server) Start() {
 
 	srv := &http.Server{
 		Handler: loggedRouter,
-		Addr:    ":7000",
+		Addr:    ":8070",
 		// Good practice: enforce timeouts for servers you create!
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
