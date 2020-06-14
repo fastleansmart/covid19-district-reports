@@ -100,9 +100,8 @@ function ReportForm() {
 
 function FederalStateSelect({ fetchAllFederalStates, handleChangeFederalState }) {
     const classes = useStyles();
-
     const federalStates = fetchAllFederalStates();
-    console.log(federalStates)
+
     return (
         <FormControl className={classes.formControl}>
             <InputLabel>Federal state</InputLabel>
