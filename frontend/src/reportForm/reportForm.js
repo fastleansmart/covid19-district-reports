@@ -74,22 +74,22 @@ function ReportForm() {
                         {/* Placeholder for spacing purposes */}
                     </Grid>
                     <Grid item xs={4}> 
-                    <FormControl className={classes.formControl}>
-                        <InputLabel>Num. of infections</InputLabel>
-                        <Input type="number" />
-                    </FormControl>
+                        <FormControl className={classes.formControl}>
+                            <InputLabel>Num. of infections</InputLabel>
+                            <Input type="number" />
+                        </FormControl>
                     </Grid>
                     <Grid item xs={4}> 
-                    <FormControl className={classes.formControl}>
-                        <InputLabel>Num. of healed</InputLabel>
-                        <Input type="number" />
-                    </FormControl>
+                        <FormControl className={classes.formControl}>
+                            <InputLabel>Num. of healed</InputLabel>
+                            <Input type="number" />
+                        </FormControl>
                     </Grid>
                     <Grid item xs={4}> 
-                    <FormControl className={classes.formControl}>
-                        <InputLabel>Death count</InputLabel>
-                        <Input type="number" />
-                    </FormControl>
+                        <FormControl className={classes.formControl}>
+                            <InputLabel>Death count</InputLabel>
+                            <Input type="number" />
+                        </FormControl>
                     </Grid>
                 </Grid>
                 <Button className={classes.button} variant="contained" color="primary">Send data</Button>
