@@ -9,9 +9,9 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import theme from "./theme";
-import { ContentContainer } from "./components/contentContainer/contentContainer";
-import { Navigation } from "./components/navigation/navigation";
-import { Header } from "./components/header/header";
+import { ContentContainer } from "./components/Layout/ContentContainer";
+import { Navigation } from "./components/Layout/Navigation";
+import { Header } from "./components/Layout/Header";
 import { RenderNotificationContext } from "./context/RenderNotification";
 
 import './ascii-art';

@@ -5,7 +5,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import { routes } from './routes';
+import { routes } from './Routes';
 
 const useStyles = makeStyles((theme) => ({
     linktext: {

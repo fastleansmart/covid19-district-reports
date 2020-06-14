@@ -15,4 +15,4 @@ services:
       context: ./backend
     image: covid19-district-reports/backend
     ports:
-      - "8070:7000"
+      - "8070:8070"

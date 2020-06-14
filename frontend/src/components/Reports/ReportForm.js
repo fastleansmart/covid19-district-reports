@@ -12,7 +12,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
 
-import { fetchFederalStates } from '../components/data/fetchLoader';
+import { fetchFederalStates } from '../../api/fetchLoader';
 
 const useStyles = makeStyles((theme) => ({
     subheading: {

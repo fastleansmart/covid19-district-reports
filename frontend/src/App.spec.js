@@ -1,26 +1,16 @@
-import { createMount } from '@material-ui/core/test-utils';
-import App from './App';
-import React from 'react';
+import { render } from "@testing-library/react";
+import App from "./App";
+import React from "react";
 
-describe('<App />', () => {
-    let mount;
-  
-    beforeAll(() => {
-        mount = createMount();
-    });
-  
-    afterAll(() => {
-        mount.cleanUp();
-    });
-  
-    it('can render App Component', () => {
-        const wrapper = mount(<App />);
-    });
+describe("<App />", () => {
+  it("can render App Component", () => {
+    render(<App />);
+  });
 
-    it('renders basic structural components', () => {
-        const wrapper = mount(<App />);
-        expect(wrapper.find('#navigation').exists()).toBeTruthy();
-        expect(wrapper.find('#header').exists()).toBeTruthy();
-        expect(wrapper.find('#content').exists()).toBeTruthy();
-    });
+  it("renders basic structural components", async () => {
+    const { container, findByTestId } = await render(<App />);
+    expect(await findByTestId("#navigation")).not.toBeNull();
+    expect(await findByTestId("#header")).not.toBeNull();
+    expect(await findByTestId("#content")).not.toBeNull();
+  });
 });
