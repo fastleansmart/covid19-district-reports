@@ -1,4 +1,5 @@
 import { createMount } from '@material-ui/core/test-utils';
+import { BrowserRouter } from "react-router-dom";
 import { Navigation } from './navigation';
 import React from 'react';
 
@@ -14,6 +15,6 @@ describe('<Navigation />', () => {
     });
   
     it('can render navigation component', () => {
-        const wrapper = mount(<Navigation />);
+        const wrapper = mount(<BrowserRouter><Navigation /></BrowserRouter>);
     });
 });

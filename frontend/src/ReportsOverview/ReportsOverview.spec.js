@@ -1,5 +1,5 @@
 import { createMount } from '@material-ui/core/test-utils';
-import { ReportsOverview } from './covidReportsOverview';
+import { ReportsOverview } from './ReportsOverview';
 import React from 'react';
 
 describe('<ReportsOverview />', () => {

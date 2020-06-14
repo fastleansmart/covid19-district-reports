@@ -1,5 +1,5 @@
 import React from "react";
-import { ReportsOverview } from "./covidReportsOverview";
+import { ReportsOverview } from "./ReportsOverview";
 
 import { RenderNotificationContext } from "../context/RenderNotification";
 
