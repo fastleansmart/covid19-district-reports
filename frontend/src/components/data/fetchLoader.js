@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:8070";
+const baseURL = "http://localhost:7000";
 
 class FetchLoader {
     constructor({ baseURL }) {
@@ -39,4 +39,6 @@ const createFetchLoaderForEndpoint = (endpoint) => {
 
 const fetchFederalStates = createFetchLoaderForEndpoint('/federal-states');
 
-export { fetchFederalStates }
+const fetchFederalStateSummaryReports = createFetchLoaderForEndpoint('/reports');
+
+export { fetchFederalStates, fetchFederalStateSummaryReports }

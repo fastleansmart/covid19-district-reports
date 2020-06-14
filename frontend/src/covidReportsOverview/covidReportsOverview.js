@@ -11,7 +11,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Alert from "@material-ui/lab/Alert";
 
-import { fetchFederalStates } from "../components/data/fetchLoader";
+import { fetchFederalStateSummaryReports } from "../components/data/fetchLoader";
 
 const useStyles = makeStyles({
   table: {},
@@ -23,27 +23,27 @@ const useStyles = makeStyles({
 });
 
 function ReportsOverview({ renderNotification }) {
-  const fetchFs = async () => {
+  const fetchFsSummaryReports = async () => {
     try {
-      return await fetchFederalStates();
+      return await fetchFederalStateSummaryReports();
     } catch (e) {
       renderNotification(<Alert severity="error">There was an error loading the data, please try again later</Alert>);
     }
 
     return Promise.resolve([]);
   };
-  const [fetchAllFederalStates] = useAsyncResource(fetchFs, []);
+  const [federalStateSummaryReports] = useAsyncResource(fetchFsSummaryReports, []);
 
   return (
     <React.Suspense fallback="states are loading">
-      <OverviewTable fetchAllFederalStates={fetchAllFederalStates} />
+      <OverviewTable federalStateSummaryReports={federalStateSummaryReports} />
     </React.Suspense>
   );
 }
 
-function OverviewTable({ fetchAllFederalStates }) {
+function OverviewTable({ federalStateSummaryReports }) {
   const classes = useStyles();
-  const federalStates = fetchAllFederalStates();
+  const summaryReports = federalStateSummaryReports();
 
     return (
         <TableContainer component={Paper}>
@@ -57,8 +57,8 @@ function OverviewTable({ fetchAllFederalStates }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {federalStates.map((federalState, index) => 
-                        <OverviewTable.Row key={index} federalState={federalState} />
+                    {summaryReports.map((summaryReport, index) => 
+                        <OverviewTable.Row key={index} summaryReport={summaryReport} />
                     )}
                 </TableBody>
             </Table>
@@ -66,16 +66,16 @@ function OverviewTable({ fetchAllFederalStates }) {
     );
 }
 
-OverviewTable.Row = function OverviewTableRow({ federalState }) {
+OverviewTable.Row = function OverviewTableRow({ summaryReport }) {
   const classes = useStyles();
 
   return (
     <React.Fragment>
-      <TableRow className={classes.tableRow} key={federalState.id}>
-        <TableCell>{federalState.name}</TableCell>
-        <TableCell align="right">{0}</TableCell>
-        <TableCell align="right">{0}</TableCell>
-        <TableCell align="right">{0}</TableCell>
+      <TableRow className={classes.tableRow} key={summaryReport.federalState_id}>
+        <TableCell>{summaryReport.name}</TableCell>
+        <TableCell align="right">{summaryReport.infects}</TableCell>
+        <TableCell align="right">{summaryReport.healed}</TableCell>
+        <TableCell align="right">{summaryReport.died}</TableCell>
       </TableRow>
     </React.Fragment>
   );
