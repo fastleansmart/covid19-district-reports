@@ -14,71 +14,71 @@ import Alert from "@material-ui/lab/Alert";
 import { fetchFederalStateSummaryReports } from "../../api/fetchLoader";
 
 const useStyles = makeStyles({
-    table: {},
-    tableRow: {
-        "&:nth-of-type(odd)": {
-            backgroundColor: "#eee",
-        },
+  table: {},
+  tableRow: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: "#eee",
     },
+  },
 });
 
 function ReportsOverview({ renderNotification }) {
-    const fetchFsSummaryReports = async () => {
+  const fetchFsSummaryReports = async () => {
     try {
-        return await fetchFederalStateSummaryReports();
+      return await fetchFederalStateSummaryReports();
     } catch (e) {
-        renderNotification(<Alert severity="error">There was an error loading the data, please try again later</Alert>);
+      renderNotification(<Alert severity="error">There was an error loading the data, please try again later</Alert>);
     }
 
-        return Promise.resolve([]);
-    };
-    const [federalStateSummaryReports] = useAsyncResource(fetchFsSummaryReports, []);
+    return Promise.resolve([]);
+  };
+  const [federalStateSummaryReports] = useAsyncResource(fetchFsSummaryReports, []);
 
-    return (
-        <React.Suspense fallback="states are loading">
-            <OverviewTable federalStateSummaryReports={federalStateSummaryReports} />
-        </React.Suspense>
-    );
+  return (
+    <React.Suspense fallback="states are loading">
+      <OverviewTable federalStateSummaryReports={federalStateSummaryReports} />
+    </React.Suspense>
+  );
 }
 
 function OverviewTable({ federalStateSummaryReports }) {
-    const classes = useStyles();
-    const summaryReports = federalStateSummaryReports();
+  const classes = useStyles();
+  const summaryReports = federalStateSummaryReports();
 
-    return (
-        <TableContainer component={Paper}>
-            <Table size={'small'} className={classes.table} stickyHeader aria-label="simple table">
-                <TableHead>
-                    <TableRow className={classes.tableRow}>
-                        <TableCell>Federal state</TableCell>
-                        <TableCell align="right">number of infections</TableCell>
-                        <TableCell align="right">of which were healed</TableCell>
-                        <TableCell align="right">deaths</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {summaryReports.map((summaryReport, index) => 
-                        <OverviewTable.Row key={index} summaryReport={summaryReport} />
-                    )}
-                </TableBody>
-            </Table>
-        </TableContainer>
-    );
+  return (
+    <TableContainer component={Paper}>
+      <Table size={"small"} className={classes.table} stickyHeader aria-label="simple table">
+        <TableHead>
+          <TableRow className={classes.tableRow}>
+            <TableCell>Federal state</TableCell>
+            <TableCell align="right">number of infections</TableCell>
+            <TableCell align="right">of which were healed</TableCell>
+            <TableCell align="right">deaths</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {summaryReports.map((summaryReport, index) => (
+            <OverviewTable.Row key={index} summaryReport={summaryReport} />
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 }
 
 OverviewTable.Row = function OverviewTableRow({ summaryReport }) {
-    const classes = useStyles();
+  const classes = useStyles();
 
-    return (
-        <React.Fragment>
-            <TableRow className={classes.tableRow} key={summaryReport.federalState_id}>
-                <TableCell>{summaryReport.name}</TableCell>
-                <TableCell align="right">{summaryReport.infects}</TableCell>
-                <TableCell align="right">{summaryReport.healed}</TableCell>
-                <TableCell align="right">{summaryReport.died}</TableCell>
-            </TableRow>
-        </React.Fragment>
-    );
+  return (
+    <React.Fragment>
+      <TableRow className={classes.tableRow} key={summaryReport.federalState_id}>
+        <TableCell>{summaryReport.name}</TableCell>
+        <TableCell align="right">{summaryReport.infects}</TableCell>
+        <TableCell align="right">{summaryReport.healed}</TableCell>
+        <TableCell align="right">{summaryReport.died}</TableCell>
+      </TableRow>
+    </React.Fragment>
+  );
 };
 
 export { ReportsOverview };
