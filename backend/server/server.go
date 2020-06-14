@@ -23,6 +23,8 @@ type Server struct {
 // Start the server
 func (server *Server) Start() {
 	corsObj := handlers.AllowedOrigins([]string{"*"})
+	headersOk := handlers.AllowedHeaders([]string{"Content-Type"})
+	methodsOk := handlers.AllowedMethods([]string{http.MethodGet, http.MethodOptions, http.MethodPost})
 
 	rep := model.MakeRepository(server.DB)
 	err := rep.SetupStructure()
@@ -32,11 +34,11 @@ func (server *Server) Start() {
 
 	h := api.MakeHandlers(rep, server.TimeSource)
 	r := mux.NewRouter()
-	r.Use(handlers.CORS(corsObj))
+	r.Use(handlers.CORS(corsObj, methodsOk, headersOk))
 	r.HandleFunc("/federal-states", h.FederalStateList)
 	r.HandleFunc("/districts", h.DistrictList)
-	r.HandleFunc("/reports", h.ReportList).Methods("GET")
-	r.HandleFunc("/reports", h.ReportCreate).Methods("POST")
+	r.HandleFunc("/reports", h.ReportList).Methods("GET", "OPTIONS")
+	r.HandleFunc("/reports", h.ReportCreate).Methods("POST", "OPTIONS")
 	r.Use(handlers.RecoveryHandler())
 	r.Use(server.ChaosCheeta.Chaos)
 
