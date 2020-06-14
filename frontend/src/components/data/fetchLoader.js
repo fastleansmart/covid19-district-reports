@@ -38,7 +38,6 @@ const createFetchLoaderForEndpoint = (endpoint) => {
 }
 
 const fetchFederalStates = createFetchLoaderForEndpoint('/federal-states');
-
 const fetchFederalStateSummaryReports = createFetchLoaderForEndpoint('/reports');
 
 export { fetchFederalStates, fetchFederalStateSummaryReports }
