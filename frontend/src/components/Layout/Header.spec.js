@@ -1,5 +1,5 @@
 import { createMount } from '@material-ui/core/test-utils';
-import { Header } from './header';
+import { Header } from './Header';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 

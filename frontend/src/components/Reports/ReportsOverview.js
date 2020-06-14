@@ -11,7 +11,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Alert from "@material-ui/lab/Alert";
 
-import { fetchFederalStateSummaryReports } from "../components/data/fetchLoader";
+import { fetchFederalStateSummaryReports } from "../../api/fetchLoader";
 
 const useStyles = makeStyles({
     table: {},

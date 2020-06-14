@@ -1,7 +1,7 @@
 import React from "react";
-import { ReportsOverview } from "./ReportsOverview";
+import { ReportsOverview } from "../Reports/ReportsOverview";
 
-import { RenderNotificationContext } from "../context/RenderNotification";
+import { RenderNotificationContext } from "../../context/RenderNotification";
 
 function ReportsOverviewContainer() {
   return (

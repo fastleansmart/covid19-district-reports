@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
-import { ReportsOverviewContainer } from "../../ReportsOverview/ReportsOverviewContainer";
-import { ReportForm } from "../../reportForm/reportForm";
-import { NotFound } from "../../NotFound/NotFound";
+import { ReportsOverviewContainer } from "../Helper/ReportsOverviewContainer";
+import { ReportForm } from "../Reports/ReportForm";
+import { NotFound } from "../NotFound/NotFound";
 
 class ContentContainer extends React.Component {
     render() {

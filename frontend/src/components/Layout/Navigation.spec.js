@@ -1,9 +1,9 @@
 import { createMount } from '@material-ui/core/test-utils';
-import { ContentContainer } from './contentContainer';
 import { BrowserRouter } from "react-router-dom";
+import { Navigation } from './Navigation';
 import React from 'react';
 
-describe('<ContentContainer />', () => {
+describe('<Navigation />', () => {
     let mount;
   
     beforeAll(() => {
@@ -14,7 +14,7 @@ describe('<ContentContainer />', () => {
         mount.cleanUp();
     });
   
-    it('can render App Component', () => {
-        const wrapper = mount(<BrowserRouter><ContentContainer /></BrowserRouter>);
+    it('can render navigation component', () => {
+        const wrapper = mount(<BrowserRouter><Navigation /></BrowserRouter>);
     });
 });
