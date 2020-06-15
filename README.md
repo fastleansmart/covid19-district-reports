@@ -9,9 +9,9 @@ Create a local docker image from the sources
     $ cd backend
     $ docker build -t covid19-district-reports/backend .
 
-The API can be launched in a docker container and exposes port 7000.
+The API can be launched in a docker container and exposes port 8070.
 
-    docker run --rm -p 8070:8070 covid19-district-reports/backend
+    docker run --rm -p 8070:8070 -e ERROR_PROBABILITY=0 covid19-district-reports/backend
 
 This starts the container and publishes the api at port 8070. A request to http://localhost:8070/districts?federalStateId=1 will return a list of districts.
 The endpoints are:
