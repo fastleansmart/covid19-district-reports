@@ -14,6 +14,8 @@ import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { fetchFederalStates } from "../../api/fetchLoader";
+import { notificationWrapper } from "../../api/notificationWrapper";
+import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles((theme) => ({
   subheading: {
@@ -31,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ReportForm() {
+function ReportForm({ renderNotification }) {
   const classes = useStyles();
   const [districtDisabled, setDistrictEnabled] = React.useState(true);
   const [selectedFederalState, setFederalState] = React.useState(null);
@@ -40,7 +42,12 @@ function ReportForm() {
   const [numOfHealed, setNumOfHealed] = React.useState(null);
   const [numOfDeaths, setNumOfDeaths] = React.useState(null);
 
-  const [fetchAllFederalStates] = useAsyncResource(fetchFederalStates, []);
+  const federalStatesWrapper = notificationWrapper(
+    fetchFederalStates,
+    renderNotification,
+    <Alert severity="error">Failed to fetch federals state list, try again later</Alert>
+  );
+  const [fetchAllFederalStates] = useAsyncResource(federalStatesWrapper, []);
 
   const handleChangeFederalState = (federalStateId) => {
     if (federalStateId !== undefined && federalStateId !== null) setDistrictEnabled(false);
@@ -107,7 +114,7 @@ function FederalStateSelect({ fetchAllFederalStates, handleChangeFederalState })
 
   const handleStateChange = (event) => {
     const { value } = event.target;
-    if (value !== undefined && value !== null) {
+    if (value === undefined && value === null) {
       return;
     }
     handleChangeFederalState(value);

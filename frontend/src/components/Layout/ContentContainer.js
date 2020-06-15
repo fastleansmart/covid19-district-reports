@@ -19,7 +19,9 @@ class ContentContainer extends React.Component {
                 <Route path="/overview" exact>
                   <ReportsOverview renderNotification={renderNotification} />
                 </Route>
-                <Route path="/add" exact component={ReportForm} />
+                <Route path="/add" exact>
+                  <ReportForm renderNotification={renderNotification} />
+                </Route>
                 <Route component={NotFound} />
               </Switch>
             );

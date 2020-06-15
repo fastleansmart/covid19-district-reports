@@ -43,7 +43,7 @@ export default function App() {
       <RenderNotificationContext.Provider value={renderNotification}>
         <BrowserRouter>
           <Container className={classes.root} maxWidth="md">
-            <Snackbar open={notificationOpen} autoHideDuration={6000} onClose={() => setNotificationOpen(false)}>
+            <Snackbar open={notificationOpen} autoHideDuration={10000} onClose={() => setNotificationOpen(false)}>
               {notificationContent ? notificationContent : null}
             </Snackbar>
             <Grid container spacing={4}>
