@@ -7,6 +7,15 @@ describe("<ReportsOverview />", () => {
     fetch.resetMocks();
   });
 
+  it("can render overview without data", async () => {
+    fetch.mockResponseOnce(() => {
+      throw new Error();
+    });
+    const renderNotification = jest.fn();
+    await render(<ReportsOverview renderNotification={renderNotification} />);
+    expect(renderNotification).toHaveBeenCalled();
+  });
+
   it("can render overview component", async () => {
     fetch.mockResponseOnce(
       JSON.stringify([

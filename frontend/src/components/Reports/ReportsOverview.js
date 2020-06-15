@@ -10,6 +10,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Alert from "@material-ui/lab/Alert";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 import { fetchFederalStateSummaryReports } from "../../api/fetchLoader";
 
@@ -35,7 +36,7 @@ function ReportsOverview({ renderNotification }) {
   const [federalStateSummaryReports] = useAsyncResource(fetchFsSummaryReports, []);
 
   return (
-    <React.Suspense fallback="states are loading">
+    <React.Suspense fallback={<LinearProgress />}>
       <OverviewTable federalStateSummaryReports={federalStateSummaryReports} />
     </React.Suspense>
   );
