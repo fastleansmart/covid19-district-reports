@@ -3,14 +3,10 @@ import App from "./App";
 import React from "react";
 
 describe("<App />", () => {
-  it("can render App Component", () => {
-    render(<App />);
-  });
-
   it("renders basic structural components", async () => {
-    const { container, findByTestId } = await render(<App />);
-    expect(await findByTestId("#navigation")).not.toBeNull();
-    expect(await findByTestId("#header")).not.toBeNull();
-    expect(await findByTestId("#content")).not.toBeNull();
+    const { findByText } = render(<App />);
+    expect(await findByText("Covid-19 District Reports")).not.toBeNull();
+    expect(await findByText("Overview")).not.toBeNull();
+    expect(await findByText("Report data")).not.toBeNull();
   });
 });

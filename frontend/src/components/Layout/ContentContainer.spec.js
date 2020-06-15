@@ -1,20 +1,14 @@
-import { createMount } from '@material-ui/core/test-utils';
-import { ContentContainer } from './ContentContainer';
+import { render } from "@testing-library/react";
+import { ContentContainer } from "./ContentContainer";
 import { BrowserRouter } from "react-router-dom";
-import React from 'react';
+import React from "react";
 
-describe('<ContentContainer />', () => {
-    let mount;
-  
-    beforeAll(() => {
-        mount = createMount();
-    });
-  
-    afterAll(() => {
-        mount.cleanUp();
-    });
-  
-    it('can render App Component', () => {
-        const wrapper = mount(<BrowserRouter><ContentContainer /></BrowserRouter>);
-    });
+describe("<ContentContainer />", () => {
+  it("can render content container component", () => {
+    const { findByText } = render(
+      <BrowserRouter>
+        <ContentContainer />
+      </BrowserRouter>
+    );
+  });
 });
